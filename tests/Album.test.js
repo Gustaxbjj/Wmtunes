@@ -1,0 +1,17 @@
+import { expect } from 'chai';
+import { sequelize, db } from './setup.js';
+
+describe('Consulta Model', () => {
+  before(async () => {
+    await sequelize.sync({ force: true });
+  });
+
+  it('Deve criar um album valido', async () => {
+    const Album = await db.Album.create({
+        name: 'Test Album',
+        artist: 'Test Artist',
+        release_year: 2023,
+    });
+    expect(Album).to.have.property('id');
+  });
+});
