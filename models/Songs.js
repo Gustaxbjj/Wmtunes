@@ -1,6 +1,6 @@
+import { DataTypes } from 'sequelize';
 
-
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize) => {
   const Song = sequelize.define('Song', {
     title: {
       type: DataTypes.STRING,

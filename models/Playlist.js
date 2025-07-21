@@ -1,4 +1,6 @@
-module.exports = (sequelize, DataTypes) => {
+import { DataTypes } from 'sequelize';
+
+export default (sequelize) => {
   const Playlist = sequelize.define('Playlist', {
     name: {
       type: DataTypes.STRING,
@@ -19,5 +21,3 @@ module.exports = (sequelize, DataTypes) => {
 
   return Playlist;
 };
-
-    

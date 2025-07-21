@@ -2,12 +2,13 @@
   "name": "wmtunes-wal",
   "version": "1.0.0",
   "main": "server.js",
+  "type": "module",
   "directories": {
     "test": "tests"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "npx nodemon server.js"
   },
   "keywords": [],
   "author": "",
