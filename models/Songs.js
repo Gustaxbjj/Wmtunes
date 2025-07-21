@@ -1,33 +1,48 @@
+import { DataTypes } from 'sequelize';
 
-
-module.exports = (sequelize, DataTypes) => {
-  const Song = sequelize.define('Song', {
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false
+export default (sequelize) => {
+  const Song = sequelize.define(
+    'Song',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      title: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+      },
+      artist: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+      },
+      duration: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      release_year: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
     },
-    artist: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    duration: {
-      type: DataTypes.INTEGER
-    },
-    release_year: {
-      type: DataTypes.INTEGER
+    {
+      tableName: 'songs',
+      timestamps: false, // ajuste se quiser createdAt/updatedAt
     }
-  });
+  );
 
-  Song.associate = models => {
+  Song.associate = (models) => {
     Song.belongsTo(models.Album, {
       foreignKey: 'album_id',
-      as: 'album'
+      as: 'album',
     });
 
     Song.belongsToMany(models.Playlist, {
       through: 'PlaylistSongs',
       foreignKey: 'song_id',
-      as: 'playlists'
+      otherKey: 'playlist_id', // sempre bom explicitar
+      as: 'playlists',
     });
   };
 

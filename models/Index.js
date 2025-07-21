@@ -1,13 +1,14 @@
 import sequelize from './../config/database.js';
 
+import sequelize from './../config/database.js';
+
 import AlbumModel from './Album.js';
-import SongModel from './Song.js';
+import SongModel from './Song.js'; 
 import PlaylistModel from './Playlist.js';
 import PlaylistSongModel from './PlaylistSong.js';
 
-// Instanciação dos models
 const Album = AlbumModel(sequelize);
-const Song = SongModel(sequelize);
+const Song = SongModel(sequelize); 
 const Playlist = PlaylistModel(sequelize);
 const PlaylistSong = PlaylistSongModel(sequelize);
 

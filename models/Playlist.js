@@ -1,23 +1,33 @@
-module.exports = (sequelize, DataTypes) => {
-  const Playlist = sequelize.define('Playlist', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
+import { DataTypes } from 'sequelize';
+
+export default (sequelize) => {
+    const Playlist = sequelize.define('Playlist', {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
+        name: {
+            type: DataTypes.STRING(100),
+            allowNull: false,
+        },
+        description: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+        },
     },
-    description: {
-      type: DataTypes.TEXT
-    }
-  });
-
-  Playlist.associate = models => {
-    Playlist.belongsToMany(models.Song, {
-      through: 'PlaylistSongs',
-      foreignKey: 'playlist_id',
-      as: 'songs'
+    {
+        tableName: 'playlists',
+        timestamps: false, // altere para true se precisar de createdAt e updatedAt
     });
-  };
 
-  return Playlist;
+    Playlist.associate = (models) => {
+        Playlist.belongsToMany(models.Song, {
+            through: 'PlaylistSongs',
+            foreignKey: 'playlist_id',
+            as: 'songs',
+        });
+    };
+
+    return Playlist
 };
-
-    

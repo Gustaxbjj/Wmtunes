@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { sequelize, db } from './setup.js';
+import { sequelize, database } from './setup.js';
 
 describe('Consulta Model', () => {
   before(async () => {
@@ -7,18 +7,17 @@ describe('Consulta Model', () => {
   });
 
   it('Deve criar uma Playlist válida', async () => {
-    const Album = await db.Album.create({
-        name: 'Test Album',
-        artist: 'Test Artist',
-        release_year: 2023,
+    const Playlist = await database.Playlist.create({
+        name: 'Playlist Teste',
+        descripition: 'Qualquer descrição',
     });
-    expect(Album).to.have.property('id');
+    expect(Playlist).to.have.property('id');
   });
 
 
-  it('Não deve um album sem nome', async () => {
+  it('Não deve um Playlist sem nome', async () => {
     try {
-      await db.Especialidade.create({});
+      await database.Playlist.create({});
       expect.fail('Deveria falhar');
     } catch (err) {
       expect(err.name).to.equal('SequelizeValidationError');

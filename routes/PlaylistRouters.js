@@ -24,6 +24,7 @@ PlaylistRouters.get('/:id', async (req, res) => {
     else
       res.status(404).json({ error: 'Nenhuma assinatura encontrada' });
   } catch (err) {
+    
     res.status(500).json({ error: 'Erro ao encontrar assinatura', details: err.message });
   }
 });
