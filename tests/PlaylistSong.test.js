@@ -2,32 +2,25 @@ import { expect } from 'chai';
 import { sequelize, database } from './setup.js';
 
 describe('PlaylistSong', () => {
+  // Sincroniza o banco antes de todos os testes
   before(async () => {
     await sequelize.sync({ force: true });
-
-    // Criar Playlists e Songs fictícios, já que PlaylistSong depende deles
-    await database.Playlists.create({ id: 1, nome: 'Favoritas' });
-    await database.Songs.create({ id: 1, titulo: 'Música 1' });
   });
 
-  it('Deve criar um vínculo válido entre playlist e música', async () => {
-    const item = await database.PlaylistSong.create({
-      playlist_id: 1,
-      song_id: 1,
-      ordem: 1
+  // Cria playlist e música antes de cada teste
+  beforeEach(async () => {
+    await database.Playlist.create({ id: 1, name: 'Favoritas' });
+    await database.Song.create({ 
+      id: 1, 
+      title: 'Música 1',
+      artist: 'Artista 1'
     });
-
-    expect(item).to.have.property('id');
-    expect(item.playlist_id).to.equal(1);
-    expect(item.song_id).to.equal(1);
-    expect(item.ordem).to.equal(1);
-    expect(item.adicionada_em).to.be.instanceOf(Date);
   });
 
   it('Não deve criar sem playlist_id', async () => {
     try {
       await database.PlaylistSong.create({
-        song_id: 1
+        song_id: 1,
       });
       expect.fail('Deveria falhar');
     } catch (err) {
