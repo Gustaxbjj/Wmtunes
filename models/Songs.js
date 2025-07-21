@@ -1,4 +1,4 @@
-import { DataTypes } from 'sequelize';
+
 
 module.exports = (sequelize, DataTypes) => {
   const Song = sequelize.define('Song', {
