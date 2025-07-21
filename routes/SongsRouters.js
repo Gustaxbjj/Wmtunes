@@ -1,93 +1,93 @@
 import express from 'express';
 import { Song } from '../models/Index.js';
 
-const Song = express.Router();
+const SongsRouters = express.Router();
 
 
-Song.get('/', async (_req, res) => {
+SongsRouters.get('/', async (_req, res) => {
   try {
-    const Song = await Song.findAll();
-    res.json(Song);
+    const Songs = await Song.findAll();
+    res.json(Songs);
   } catch (err) {
     res.status(500).json({ error: 'Erro ao buscar o Song', details: err.message });
   }
 });
 
 
-Song.get('/:id', async (req, res) => {
+SongsRouters.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const Song = await Song.findByPk(id);
+    const Songs= await Song.findByPk(id);
 
-    if (Song)
-      res.json(Song);
+    if (Songs)
+      res.json(Songs);
     else
-      res.status(404).json({ error: 'Nenhuma playlist Song encontrada' });
+      res.status(404).json({ error: 'Nenhuma Song encontrada' });
   } catch (err) {
-    res.status(500).json({ error: 'Erro ao encontrar Playlist song', details: err.message });
+    res.status(500).json({ error: 'Erro ao encontrar  Song', details: err.message });
   }
 });
 
 
-Song.post('/', async (req, res) => {
+SongsRouters.post('/', async (req, res) => {
   try {
-    const playlistSong = PlaylistSong.build(req.body);
-    await playlistSong.validate();
-    await playlistSong.save();
+    const Songs = Song.build(req.body);
+    await Songs.validate();
+    await Songs.save();
 
-    res.status(201).json(playlistSong);
+    res.status(201).json(Songs);
   } catch (err) {
-    res.status(500).json({ error: 'Erro ao salvar playlist song', details: err.message });
+    res.status(500).json({ error: 'Erro ao salvar  Songs', details: err.message });
   }
 });
 
-Song.post('/batch', async (req, res) => {
+SongsRouters.post('/batch', async (req, res) => {
   try {
-    const result = await PlaylistSong.bulkCreate(req.body);
+    const result = await Song.bulkCreate(req.body);
     res.status(201).json(result);
   } catch (err) {
-    res.status(500).json({ error: 'Erro ao salvar o playlist Song', details: err.message, errorFull: err });
+    res.status(500).json({ error: 'Erro ao salvar o Song', details: err.message, errorFull: err });
   }
 });
 
 
 
-Song.put('/:id', async (req, res) => {
+SongsRouters.put('/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const [updated] = await PlaylistSong.update(req.body, {
+    const [updated] = await Song.update(req.body, {
       where: { id },
     });
 
     if (updated) {
-      const playlistSongAtualizada = await PlaylistSong.findByPk(id);
-      return res.json(playlistSongAtualizada);
+      const SongAtualizada = await Song.findByPk(id);
+      return res.json(SongAtualizada);
     }
 
-    return res.status(404).json({ error: 'Playlist Song não encontrada' });
+    return res.status(404).json({ error: ' Songs não encontrada' });
   } catch (err) {
-    res.status(500).json({ error: 'Erro ao atualizar Playlist song', details: err.message });
+    res.status(500).json({ error: 'Erro ao atualizada Song', details: err.message });
   }
 });
 
 
-Song.delete('/:id', async (req, res) => {
+SongsRouters.delete('/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const deleted = await PlaylistSong.destroy({
+    const deleted = await Song.destroy({
       where: { id },
     });
 
     if (deleted) {
-      return res.json({ message: 'Música da playlist deletada com sucesso' });
+      return res.json({ message: 'Song  deletado com sucesso' });
     }
 
-    return res.status(404).json({ error: 'Música  não encontrada na playlist' });
+    return res.status(404).json({ error: 'Song  não encontrada' });
   } catch (err) {
-    res.status(500).json({ error: 'Erro ao deletar Música da playlist', details: err.message });
+    res.status(500).json({ error: 'Erro ao deletar Song', details: err.message });
   }
 });
 
-export default Song;
+export default SongsRouters;
