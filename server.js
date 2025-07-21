@@ -1,4 +1,4 @@
-import {   Usuario, Livros,UsuarioLivros,Postagem,TelefoneUsuario, FormasDePagamento, PagamentoCartao, Entrega, UsuarioVendas,  Plano,  Assinaturas, EscritorLivros, Comentario,} from './models/Index.js';
+
 import express from 'express';
 import bodyParser from 'body-parser';
 import sequelize from './config/database.js';
@@ -6,8 +6,8 @@ import sequelize from './config/database.js';
 
 import albumrouter from './routes/AlbumRouters.js';
 import playlistsrouter from './routes/PlaylistRouters.js';
-import songrouter from './routes/SongsRouters.js';
-import usuariorouter from './routes/UsuarioRouters.js';
+//import songrouter from './routes/SongsRouters.js';
+//import usuariorouter from './routes/UsuarioRouters.js';
 import playlistSongrouter from './routes/PlaylistSongRouters.js'
 
 
@@ -24,8 +24,8 @@ app.get('/version', (req, res) =>{
 
 app.use('/album', albumrouter);
 app.use('/playlist', playlistsrouter);
-app.use('/song', songrouter);
-app.use('/usuario', usuariorouter);
+//app.use('/song', songrouter);
+//app.use('/usuario', usuariorouter);
 app.use('/playlistSong', playlistSongrouter);
 
 sequelize.sync({ alter: true })
