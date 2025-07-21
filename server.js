@@ -4,9 +4,11 @@ import bodyParser from 'body-parser';
 import sequelize from './config/database.js';
 
 
-import entregarouter from './routes/EntregaRouters.js';
-import assinaturasrouter from './routes/AssinaturaRouters.js';
-import comentariorouter from './routes/ComentarioRouters.js';
+import albumrouter from './routes/AlbumRouters.js';
+import playlistsrouter from './routes/PlaylistRouters.js';
+import songrouter from './routes/SongsRouters.js';
+import usuariorouter from './routes/UsuarioRouters.js';
+import playlistSongrouter from './routes/PlaylistSongRouters.js'
 
 
 
@@ -20,9 +22,11 @@ app.get('/version', (req, res) =>{
  res.json({status: 'ok', version: '1.0.0'});
 });
 
-app.use('/entrega', entregarouter);
-app.use('/assinatura', assinaturasrouter);
-app.use('/comentario', comentariorouter);
+app.use('/album', albumrouter);
+app.use('/playlist', playlistsrouter);
+app.use('/song', songrouter);
+app.use('/usuario', usuariorouter);
+app.use('/playlistSong', playlistSongrouter);
 
 sequelize.sync({ alter: true })
   .then(() => {
