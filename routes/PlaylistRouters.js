@@ -62,13 +62,13 @@ PlaylistRouters.put('/:id', async (req, res) => {
     });
 
     if (updated) {
-      const AssinaturasAtualizada = await Playlist.findByPk(id);
-      return res.json(AssinaturasAtualizada);
+      const PlaylistAtualizada = await Playlist.findByPk(id);
+      return res.json(PlaylistAtualizada);
     }
 
-    return res.status(404).json({ error: 'Assinatura não encontrada' });
+    return res.status(404).json({ error: 'Playlist não encontrada' });
   } catch (err) {
-    res.status(500).json({ error: 'Erro ao atualizar assinatura', details: err.message });
+    res.status(500).json({ error: 'Erro ao atualizar a Playlist', details: err.message });
   }
 });
 
@@ -82,12 +82,12 @@ PlaylistRouters.delete('/:id', async (req, res) => {
     });
 
     if (deleted) {
-      return res.json({ message: 'Assinatura deletada com sucesso' });
+      return res.json({ message: 'Playlist deletada com sucesso' });
     }
 
-    return res.status(404).json({ error: 'Assinatura não encontrada' });
+    return res.status(404).json({ error: 'Playlist não encontrada' });
   } catch (err) {
-    res.status(500).json({ error: 'Erro ao deletar avaliação', details: err.message });
+    res.status(500).json({ error: 'Erro ao deletar Playlist', details: err.message });
   }
 });
 

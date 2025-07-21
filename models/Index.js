@@ -1,17 +1,18 @@
 import sequelize from './../config/database.js';
 
-import sequelize from './../config/database.js';
-
-import AlbumModel from './Album.js';
-import SongModel from './Song.js'; 
+import AlbumModel from './Album.js'
+import SongModel from './Songs.js';
 import PlaylistModel from './Playlist.js';
 import PlaylistSongModel from './PlaylistSong.js';
+import UsuarioModel from './Usuario.js';
 
-const Album = AlbumModel(sequelize);
-const Song = SongModel(sequelize); 
+
+// Instanciação dos models
+const Album = AlbumModel(sequelize)
+const Song = SongModel(sequelize);
 const Playlist = PlaylistModel(sequelize);
 const PlaylistSong = PlaylistSongModel(sequelize);
-
+const Usuario = UsuarioModel(sequelize)
 // RELACIONAMENTOS
 
 // Album -> Song
@@ -48,4 +49,5 @@ export {
   Song,
   Playlist,
   PlaylistSong,
+  Usuario
 };

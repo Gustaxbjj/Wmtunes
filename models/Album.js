@@ -1,37 +1,30 @@
 import { DataTypes } from 'sequelize';
 
 export default (sequelize) => {
-  const Album = sequelize.define(
-    'Album',
-    {
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      artist: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      release_year: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
+  const Album = sequelize.define('Album', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
     },
-    {
-      tableName: 'albums',
-      timestamps: false, // altere para true se quiser usar createdAt/updatedAt
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    artist: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    release_year: {
+      type: DataTypes.INTEGER
     }
-  );
+  });
 
-  Album.associate = (models) => {
+  Album.associate = models => {
     Album.hasMany(models.Song, {
       foreignKey: 'album_id',
-      as: 'songs',
+      as: 'songs'
     });
   };
 

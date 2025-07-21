@@ -1,8 +1,8 @@
 {
   "type": "module",
   "scripts": {
-    "start": "npx nodemon server.js",
-    "test": "cross-env NODE_ENV=test mocha tests/**/*.test.js --exit"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon server.js"
   },
   "dependencies": {
     "chai": "^5.2.1",
