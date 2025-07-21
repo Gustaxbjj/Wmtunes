@@ -32,19 +32,12 @@ export default (sequelize) => {
     }
   );
 
-  Song.associate = (models) => {
-    Song.belongsTo(models.Album, {
-      foreignKey: 'album_id',
-      as: 'album',
-    });
-
-    Song.belongsToMany(models.Playlist, {
-      through: 'PlaylistSongs',
-      foreignKey: 'song_id',
-      otherKey: 'playlist_id', // sempre bom explicitar
-      as: 'playlists',
-    });
-  };
+Song.belongsToMany(models.Playlist, {
+  through: 'playlist_songs', // 🔄 corrigido
+  foreignKey: 'song_id',
+  otherKey: 'playlist_id',
+  as: 'playlists',
+});
 
   return Song;
 };

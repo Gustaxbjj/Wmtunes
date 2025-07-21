@@ -21,13 +21,12 @@ export default (sequelize) => {
         timestamps: false, // altere para true se precisar de createdAt e updatedAt
     });
 
-    Playlist.associate = (models) => {
-        Playlist.belongsToMany(models.Song, {
-            through: 'PlaylistSongs',
-            foreignKey: 'playlist_id',
-            as: 'songs',
-        });
-    };
+   Playlist.belongsToMany(models.Song, {
+  through: 'playlist_songs', // 🔄 corrigido
+  foreignKey: 'playlist_id',
+  otherKey: 'song_id',
+  as: 'songs',
+});
 
     return Playlist
 };

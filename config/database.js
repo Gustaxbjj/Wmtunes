@@ -14,7 +14,7 @@ const config = {
     dialect: 'postgres',
   },
   test: {
-    database: 'hospital_test',
+    database: process.env.DB_NAME_TEST || 'Wmtunes_test',
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
