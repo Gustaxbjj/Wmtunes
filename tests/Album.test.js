@@ -14,4 +14,14 @@ describe('Consulta Model', () => {
     });
     expect(Album).to.have.property('id');
   });
+
+
+  it('Não deve um album sem nome', async () => {
+    try {
+      await db.Especialidade.create({});
+      expect.fail('Deveria falhar');
+    } catch (err) {
+      expect(err.name).to.equal('SequelizeValidationError');
+    }
+  });
 });
